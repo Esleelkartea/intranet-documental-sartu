@@ -1,0 +1,32 @@
+<page title="Gestión">
+  <body: class="front-page"/>
+
+  <content:>
+    <header class="content-header">
+      <h1>Información de gestión</h1>
+      <section class="welcome-message">
+        <h3>XXX</h3>
+        <ul>
+          <li>ddd</li>
+        </ul>
+
+	<div id="froga">
+
+	<table>
+	<tr><th>Proyecto</th><th>Ofertado</th></tr>
+	<collection with="&current_user.proyectos">
+	  <tr>
+	  XX #{this.name}
+	  </tr>
+	</collection>
+	</table>
+
+	</div>
+
+      </section>
+    </header>
+
+    <section class="content-body">
+    </section>
+  </content:>
+</page>

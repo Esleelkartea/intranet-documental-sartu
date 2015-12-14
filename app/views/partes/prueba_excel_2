@@ -1,0 +1,15 @@
+<%
+ book = Spreadsheet::Workbook.new
+ data = book.create_worksheet :name => 'myname'
+ data.row(0).concat %w{name email}
+ header_format = Spreadsheet::Format.new :color => :green, :weight => :bold
+ data.row(0).default_format = header_format
+ @records.each_do { |u| 
+   data.row(i+1).push n.horas
+ }
+
+ blob = StringIO.new('')
+ book.write(file_blob)
+%>
+
+<%= blob.string %>

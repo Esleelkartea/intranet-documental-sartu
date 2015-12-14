@@ -1,0 +1,8 @@
+<new-page>
+  <after-content:>
+    <if test="&current_user.administrator?">
+      <a href="/export_excel">Generar hoja excel</a>
+    </if>
+    <vista/>
+  </after-content:>
+</new-page>

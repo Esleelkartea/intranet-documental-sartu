@@ -1,0 +1,134 @@
+<!-- Global taglib - these tags are shared across all subsites -->
+
+<include src="rapid" gem="hobo"/>
+
+<include src="taglibs/auto/rapid/cards"/>
+<include src="taglibs/auto/rapid/pages"/>
+<include src="taglibs/auto/rapid/forms"/>
+
+<set-theme name="clean"/>
+
+<include plugin="hobo-jquery" />
+<include src="hobo-contrib-all" plugin="hobo-contrib"/>
+
+<def tag="input" for="Date">
+  <hjq-datepicker dateFormat="yy-mm-dd" merge />
+</def>
+
+
+<extend tag="page">
+  <old-page merge>
+    <custom-scripts:>
+      <hjq-assets/>
+    </custom-scripts>
+    <footer:>
+      <a href="&admin_users_url" if="&current_user.administrator?">
+        <t key="hobo.admin.subsite_name">Admin</t>
+      </a>
+    </footer:>
+  </old-page>
+</extend>
+
+<def tag="app-name">Intranet :: Herram. Gestión</def>
+
+<def tag="main-nav">
+  <navigation class="main-nav" merge-attrs param="default">
+<!--    <nav-item href="#{base_url}/">Home</nav-item> -->
+<!--    <nav-item href="#{base_url}/gestion/">Gestión</nav-item> -->
+    <nav-item with="&Proyecto"><ht key="proyecto.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
+    <nav-item with="&Itemgestion"><ht key="itemgestion.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
+    <nav-item with="&Parte"><ht key="parte.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
+  </navigation>
+</def>
+
+<def tag="form" for="Proyecto">
+  <form merge param="default">
+    <error-messages param/>
+    <field-list fields="name, etiquetas, zona, entidads, clientes, fecha_inicio, fecha_cierre, num_h_destinatarios, num_m_destinatarias, itemgestions, users, actividades" param/>
+    <div param="actions">
+      <submit label="#{ht 'proyecto.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
+    </div>
+  </form>
+</def>
+
+<extend tag="form" for="Itemgestion">
+  <old-form merge>
+    <error-messages param/>
+    <field-list fields="tipo, proyecto, cliente, name, fecha, cantidad, pendiente, observaciones">
+      <cliente-view:>
+        <do part="cliente-menu">
+          <if test="&@itemgestion.proyecto">
+	    <select-one options="&@itemgestion.proyecto.clientes"/>
+	  </if>
+	  <else>
+            <select disabled><option>Antes elije un proyecto</option></select>
+          </else>
+       	</do>
+      </cliente-view:>
+    </field-list>
+    <div param="actions">
+      <submit label="#{ht 'itemgestion.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
+    </div>
+  </old-form>
+</extend>
+
+<def tag="error-messages2">
+  <section class='error-messages' merge-attrs if='&this.errors.size > 0'>
+    <ul param>
+      <% this.errors.to_a.each do |message| -%>
+      <li param><%= message %></li>
+      <% end -%>
+    </ul>
+  </section>
+</def>
+
+<def tag="vista">
+   <div id="tabla plus">
+     <table-plus with="&@tmp" fields="semana,horas,proyecto,actividad">
+     <semana-view:>
+       <view/>
+       [#{husemana this, current_user}]
+     </semana-view:>
+     <proyecto-view:>
+       <a href="/proyectos/#{this.id}"><view/></a>
+       [#{ huproyecto this_parent.id, current_user}]
+     </proyecto-view:>
+     <controls:/>
+      </table-plus>
+   </div>
+</def>
+
+<extend tag="form" for="Parte">
+  <old-form merge>
+    <error-messages2 param/>
+
+    <div id="formulario">
+    <div id="campos">
+      <fieldset class="horizontal">
+
+        <feckless-fieldset fields="anho,semana,horas" class="inline-vertical">
+    	 <semana-view:>
+      	  <do part="semana-menu">
+       	    <select-input options="&Parte.semanasanho (@this.anho)" />
+      	  </do>
+    	 </semana-view:>
+  	</feckless-fieldset>
+
+  	<feckless-fieldset fields="proyecto, actividad" class="inline-vertical">
+ 	 <actividad-view:>
+       	  <do part="actividad-menu">
+	      <if test="&@parte.proyecto"><select-one options="&@parte.proyecto.actividades"/></if>
+              <else><select disabled><option>Antes elige un proyecto</option></select></else>
+       	  </do>
+     	 </actividad-view:>
+    	</feckless-fieldset>
+
+      </fieldset>
+    </div>
+    <div id="botones">
+      <submit label="#{ht 'parte.actions.save', :default=>['Save']}"/>
+    </div>
+   </div>
+
+  </old-form>
+</extend>

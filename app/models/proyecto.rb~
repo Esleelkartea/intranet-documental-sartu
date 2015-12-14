@@ -1,0 +1,137 @@
+# -*- coding: utf-8 -*-
+class Proyecto < ActiveRecord::Base
+
+  hobo_model # Don't put anything above this
+
+  fields do
+    name         :string
+    etiquetas    :string
+    prioridad    enum_string(:alta, :media, :baja), default => :baja
+    fecha_inicio :date
+    fecha_cierre :date
+    num_h_destinatarios :integer
+    num_m_destinatarias :integer
+    observaciones :text
+    timestamps
+  end
+
+  has_many :users, :through => :proyecto_users, :accessible => true
+  has_many :proyecto_users
+
+  has_many :clientes, :through => :cliente_proyectos, :accessible => true
+  has_many :cliente_proyectos
+
+  has_many :entidads, :through => :entidad_proyectos, :accessible => true
+  has_many :entidad_proyectos
+
+  has_many :actividades, :through => :actividad_proyectos, :source => :actividad, :accessible => true
+  has_many :actividad_proyectos, :dependent => :destroy
+
+  has_many :itemgestions
+
+  has_many :partes
+
+  children :itemgestions, :clientes, :entidads, :users
+
+  belongs_to :zona
+
+  #validates_numericality_of :num_h_destinatarios, :num_m_destinatarias
+  validates_presence_of :entidads, :clientes, :users, :zona
+
+  # --- Permissions --- #
+
+  def create_permitted?
+    acting_user.administrator?
+  end
+
+  def update_permitted?
+    acting_user.administrator?
+  end
+
+  def destroy_permitted?
+    acting_user.administrator?
+  end
+
+  def view_permitted?(field)
+    true
+  end
+
+  def ofertado
+    Itemgestion.sum(:cantidad, :conditions => [ 'proyecto_id = ? and tipo = "oferta"', id ] )
+  end
+  def perdido
+    Itemgestion.sum(:cantidad, :conditions => [ 'proyecto_id = ? and tipo = "oferta_perdida"', id ] )
+  end
+  def oferta_dif
+    ofertado - perdido
+  end
+  def ofertas
+    ActionController::Base.helpers.number_to_currency(ofertado).to_str + "\n" +
+      ActionController::Base.helpers.number_to_currency(perdido).to_str + "\n" +
+      ActionController::Base.helpers.number_to_currency(oferta_dif).to_str
+  end
+  def pedido
+    Itemgestion.sum(:cantidad, :conditions => [ 'proyecto_id = ? and tipo = "pedido"', id ] )
+  end
+  def denegado
+    Itemgestion.sum(:cantidad, :conditions => [ 'proyecto_id = ? and tipo = "pedido_denegado"', id ] )
+  end
+  def pedido_neto
+    pedido - denegado
+  end
+  def pedido_pdte
+    oferta_dif - pedido
+  end
+  def pedidos
+    ActionController::Base.helpers.number_to_currency(pedido).to_str + "\n" +
+      ActionController::Base.helpers.number_to_currency(denegado).to_str + "\n" +
+      ActionController::Base.helpers.number_to_currency(pedido_neto).to_str + "\n" +
+      ActionController::Base.helpers.number_to_currency(pedido_pdte).to_str
+  end
+  def facturado
+    Itemgestion.sum(:cantidad, :conditions => [ 'proyecto_id = ? and tipo = "factura"', id ] )
+  end
+  def devuelto
+    Itemgestion.sum(:cantidad, :conditions => [ 'proyecto_id = ? and tipo = "factura_devuelta"', id ] )
+  end
+  def factura_neto
+    facturado - devuelto
+  end
+  def factura_pdte
+    pedido_neto - factura_neto
+  end
+  def facturas
+    ActionController::Base.helpers.number_to_currency(facturado).to_str + "\n" +
+      ActionController::Base.helpers.number_to_currency(devuelto).to_str + "\n" +
+      ActionController::Base.helpers.number_to_currency(factura_neto).to_str + "\n" +
+      ActionController::Base.helpers.number_to_currency(factura_pdte).to_str
+  end
+  def cobrado
+    Itemgestion.sum(:cantidad, :conditions => [ 'proyecto_id = ? and tipo = "cobro"', id ] )
+  end
+  def impagado
+    Itemgestion.sum(:cantidad, :conditions => [ 'proyecto_id = ? and tipo = "impago"', id ] )
+  end
+  def cobro_neto
+    cobrado - impagado
+  end
+  def cobro_pdte
+    factura_neto - cobrado - impagado
+  end
+  def cobros
+    ActionController::Base.helpers.number_to_currency(cobrado).to_str + "\n" +
+      ActionController::Base.helpers.number_to_currency(impagado).to_str + "\n" +
+      ActionController::Base.helpers.number_to_currency(cobro_neto).to_str + "\n" +
+      ActionController::Base.helpers.number_to_currency(cobro_pdte).to_str
+  end
+
+  def clientes_str
+    clientes.map(&:name).join','
+  end
+  def users_str
+    users.map(&:name).join','
+  end
+  def entidades_str
+    entidads.map(&:name).join','
+  end
+end

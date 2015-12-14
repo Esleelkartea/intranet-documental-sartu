@@ -1,0 +1,45 @@
+<index-page >
+
+  <before-content-body:>
+    <div class="info">
+      <a href="/export_excel_proyectos">Generar hoja excel completa</a>
+
+      <h3>Subtotales</h3>
+      <table id="info">
+        <tr>
+	  <th colspan="2">OFERTAS</th><th colspan="2">PEDIDOS</th><th colspan="2">FACTURACIÓN</th><th colspan="2">COBROS</th>
+	</tr>
+	  <th>Ofertado:</th><td><%= number_to_currency (@ofertado) %></td>
+	  <th>Pedido:</th><td><%= number_to_currency (@pedido) %></td>
+	  <th>Facturado:</th><td><%= number_to_currency (@facturado) %></td>
+	  <th>Cobrado:</th><td><%= number_to_currency (@cobrado) %></td>
+        <tr>
+	  <th>Perdido:</th><td><%= number_to_currency (@perdido) %></td>
+	  <th>Denegado:</th><td><%= number_to_currency (@denegado) %></td>
+	  <th>Devuelto:</th><td><%= number_to_currency (@devuelto) %></td>
+	  <th>Impagado:</th><td><%= number_to_currency (@impagado) %></td>
+	</tr>
+        <tr>
+	  <th>Diferencia:</th><td><%= number_to_currency (@oferta_dif) %></td>
+	  <th>Neto:</th><td><%= number_to_currency (@pedido_neto) %></td>
+	  <th>Neto:</th><td><%= number_to_currency (@factura_neto) %></td>
+	  <th>Neto:</th><td><%= number_to_currency (@cobro_neto) %></td>
+	</tr>
+        <tr>
+	  <td></td><td></td>
+	  <th>Pendiente:</th><td><%= number_to_currency (@pedido_pdte) %></td>
+	  <th>Pendiente:</th><td><%= number_to_currency (@factura_pdte) %></td>
+	  <th>Pendiente:</th><td><%= number_to_currency (@cobro_pdte) %></td>
+	</tr>
+      </table>
+    </div>
+  </before-content-body:>
+
+  <collection: replace>
+    <table-plus with="&@proyectos" fields="name, etiquetas, prioridad,
+              ofertas, pedidos, facturas, cobros">
+      <!--name-view:><a with="&this_parent" class="&this_parent.prioridad"/></name-view:-->
+      <prioridad-view:><view class="&this"/></prioridad-view:>
+    </table-plus>
+  </collection>
+</index-page>

@@ -1,0 +1,10 @@
+<table border="1">
+  <tr>
+    <th>Horas</th>
+  </tr>
+  <% @records.each do |u| %>
+  <tr>
+   <td><%= u.horas %></td>
+  <% end %>
+ </tr>
+</table>

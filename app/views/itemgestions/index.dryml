@@ -1,0 +1,19 @@
+<index-page >
+  <before-content-body:>
+    <div class="info">
+        <a href="/export_excel_itemgestions">Generar hoja excel completa</a>
+    </div>
+  </before-content-body:>
+
+  <collection: replace>
+    <table-plus with="&@itemgestions" fields="name, etiquetas, proyecto, cliente, tipo, fecha, cantidad, pendiente">
+      <name-view:><a with="&this_parent"/></name-view:>
+      <pendiente-view:>
+        <span class="#{this}"><view/></span>
+      </pendiente-view:>
+      <cantidad-view:>
+        <%= number_to_currency (this) %>
+      </cantidad-view:>
+    </table-plus>
+  </collection>
+</index-page>

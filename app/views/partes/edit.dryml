@@ -1,0 +1,10 @@
+<edit-page>
+  <delete-button: replace/>
+
+  <after-content:>
+    <if test="&current_user.administrator?">
+      <a href="/export_excel">Generar hoja excel</a>
+    </if>
+    <vista/>
+  </after-content:>
+</edit-page>

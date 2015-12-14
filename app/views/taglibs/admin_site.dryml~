@@ -1,0 +1,31 @@
+<!-- Tag definitions for the admin subsite -->
+
+<include src="rapid" gem="hobo"/>
+
+<include src="taglibs/auto/admin/rapid/cards"/>
+<include src="taglibs/auto/admin/rapid/pages"/>
+<include src="taglibs/auto/admin/rapid/forms"/>
+
+<set-theme name="clean"/>
+
+<include plugin="hobo-jquery" />
+<include src="hobo-contrib-all" plugin="hobo-contrib"/>
+
+<def tag="input" for="Date">
+  <hjq-datepicker dateFormat="yy-mm-dd" merge />
+</def>
+
+<extend tag="page">
+  <old-page merge>
+    <custom-scripts:>
+      <hjq-assets/>
+    </custom-scripts>
+
+    <append-stylesheets:>
+      <stylesheet name="admin"/>
+    </append-stylesheets:>
+    <footer:>
+      <a href="#{base_url}/"><t key="hobo.subsite.back_link">View Site</t></a>
+    </footer:>
+  </old-page>
+</extend>

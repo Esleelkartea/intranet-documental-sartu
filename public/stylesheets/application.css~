@@ -1,0 +1,151 @@
+/* Cabecera */
+.page-header {
+    background-color:#ccc;
+    background-image: url(../images/logo_sartu.gif);
+    background-position:left top;
+    background-repeat: no-repeat;
+}
+.page-header a {
+    color: #ccc
+}
+
+
+
+h1.app-name {    
+    text-align: center;
+    color:black;
+#    visibility:hidden;
+}
+
+/* Partes */
+
+.parte div.section.content-header {
+    padding-bottom:0px;
+}
+.parte div.section.content-body {
+    padding-top:3px;
+    padding-bottom:3px;
+}
+.parte div.section.error-messages, div.flash.notice {
+    margin-bottom:0px;
+    padding-top:3px;
+    padding-bottom:3px;
+}
+
+.parte div.section.with-flash.content {
+    height:210px;
+}
+
+.parte form.parte #formulario {
+    margin-top:7px;
+}
+
+.parte form.parte #campos {
+    border-width:1px;
+    border-style:solid;
+    border-radius:10px;
+    
+    background-color: #eee;
+    float:left;
+    padding-right: 20px;
+}
+.parte form.parte #botones {
+    float:left;
+    margin-left: 20px;
+}
+
+
+.parte form.parte .horas-field input {
+    width: 50px;
+    text-align: right;
+}
+
+
+.parte .table-plus div.search{
+    float:left;
+}
+
+.parte .table-plus .edit-link {
+    padding: 1px 1px 1px 4px;
+    font-size: 11px;
+    font-family: Arial;
+    font-weight: bold;
+    background-color: #5b8ba0;
+    color: white;
+    border-bottom-style:none;
+}
+
+.parte .table-plus .edit-link:hover {background-color: #193440;}
+
+.parte .table-plus .button_to {
+    visibility:hidden; /* Para indicar el registro que se está cambiando */
+}
+
+.parte .table-plus table td.controls {
+    width: 150px;
+}
+
+.parte .table-plus form.button_to {
+    display:inline-block;
+}
+
+.parte span.actividad {
+    display:inline-block;
+    width: 30%;
+    border-width:1px;
+    border-style:dotted;    
+}
+
+
+/* Zona de items de gestión */
+
+.itemgestion .pendiente-view .true {
+    background-color: #f00;
+}
+
+.itemgestion .pendiente-view .false {
+    background-color: #0f0;
+}
+
+.itemgestion div.info {
+    margin-left: 45px;
+}
+
+.itemgestion td.cantidad-view {
+    text-align: right;
+}
+
+
+/* Zona de proyectos */
+.proyecto div.info {
+    margin-left: 45px;
+}
+
+.proyecto table#info th {
+    background-color: #cc0;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px solid black;
+}
+
+.proyecto table#info td {
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px solid black;
+    text-align: right;
+}
+
+.proyecto td.ofertas-view, td.pedidos-view, td.facturas-view, td.cobros-view {
+    text-align: right;
+    border: 1px solid black;
+}
+
+.proyecto a.alta {
+    background-color: #c30;
+    color: white;
+}
+
+.proyecto a.media {
+    background-color: #c90;
+    color: white;    
+}

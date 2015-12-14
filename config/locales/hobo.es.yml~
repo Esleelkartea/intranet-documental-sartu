@@ -1,0 +1,202 @@
+# Hobo internals translation file for Spanish (Mexico).
+# Translated by Domizio Demichelis (dd.nexus@gmail.com)
+# Corrections by Ricardo Pacheco
+
+# This file might be used for other Latin America Spanish Countries without any change
+# It might be ok also for Spain. If you find any error, or if you have any more specific translation,
+# please post it to http://hobousers.googlegroups.com. Thank you!
+
+es:
+  hobo:
+    # default hobo pages translations
+    index:
+      # if you uncomment the following you will loose the automatic selection of dinamically pluralized nav-tabs
+      # if you need a different title you should implement a different way to select the tab on your own
+      #title: "Indice %{model}"
+      heading: "Indice %{model}"
+
+    new:
+      title: "Nuevo Registro de %{model}"
+      heading: "Nuevo Registro de %{model}"
+
+    show:
+      title: "%{model}"
+      heading: "%{model} %{name}"
+      back_link: "Atrás"
+      edit_link: "Actualizar %{model}"
+      new_link: "Nuevo Registro %{model}"
+      add_form_heading: "Añadir %{model}"
+
+    edit:
+      title: "Actualización %{model}"
+      heading: "Actualización %{model}"
+
+    index_for_owner:
+      title: "%{model} para"
+      # you can use the following to completely override the collection heading
+      # be aware that you will loose the automatic Your <collection> / Jom's <collection>
+      # default output for User models
+      # you better define the heading.* in the specific collection namespace
+      #heading:
+      subheading: "Para:"
+
+    new_for_owner:
+      title: "Nuevo registro de %{model} para"
+      heading: "Nuevo registro de %{model}"
+      subheading: "Para:"
+
+    login:
+      title: "Iniciar sesión"
+      heading: "Iniciar sesión"
+      email_address: &email_address "Correo eléctronico"
+      name: "Nombre"
+      password: "Contraseña"
+      remember_me: "Recuerda mis datos"
+      login: "Identifición"
+      signup: "Inscripción"
+      forgot_password: &forgot_password "¿Contraseña olvidada?"
+
+    signup:
+      title: "Inscripción"
+      heading: "Alta de nuevo usuario/a"
+
+    forgot_password:
+      title: *forgot_password
+      heading: *forgot_password
+      text: "Introduce la dirección de tu correo eléctronico que indicaste cuando te inscribiste.
+             Te enviaremos un correo eléctronico que podrás utilizar para generar una nueva contraseña."
+      email_address: *email_address
+      send: "Enviar"
+
+    forgot_password_sent:
+      title: "Contraseña olvidada - Correo eléctronico enviado"
+      heading: "Contraseña olvidada - Correo eléctronico enviado"
+      text: "El mensaje con las instruciones para generar una nueva contraseña ha sido enviado a %{email_address}
+             Si no lo recibes, por favor verifica el filtro anti-spam."
+
+    account_disabled_page:
+      title: "Cuenta Desactivada"
+      heading: "Cuenta Desactivada"
+      text: "Tu cuenta está desactivada en ese momento."
+
+    account_page:
+      title: "Tu Perfil"
+      heading: "Tu Perfil"
+      new_password: "Nueva contraseña"
+      confirm_new_password: "Confirmación nueva contraseña"
+
+    # default hobo action translation
+    actions:
+      new: "Nuevo registro de %{model}"
+      create: "Crear %{model}"
+      previous: "Precedente"
+      next: "Próximo/a"
+      add: "Añadir"
+      show_all: "Muestra todos/as %{model}..."
+      delete: "Borrar %{model}"
+      save: "Guardar %{model}"
+      cancel: "Cancelar"
+      edit: "Actualizar %{model}"
+      edit_control: "Actualizar"
+      back: "Volver a"
+      back_to_parent: "Volver a %{parent} %{name}"
+      send: "Enviar"
+      remove: "Eliminar"
+      signup: "Inscripción"
+      login: "Iniciar Sesión"
+      logout: "Terminar Sesión"
+      logged_in_as: "%{name}"
+      account: "Perfil"
+      save_account: "Guarda tu perfil"
+
+    # default hobo message translation
+    messages:
+      create:
+        success: "La creación de %{model} ha sido correcta"
+        error: "La creación de %{model} no ha sido correcta.\n%{errors}"
+      creator:
+        error: "El creator %{name} no se pudo ejecutar.\n%{errors}"
+      transition:
+        error: "La transición %{name} no se pudo ejecutar.\n%{errors}"
+      update:
+        no_attribute_error: "Ninguna actualización esta especificada en los parámetros"
+        success: "La actualización de %{model} han sido correcta"
+        error: "Ha habido un error con la actualización.\n%{errors}"
+      destroy:
+        success: "El borrado de %{model} se ha realizado correctamente."
+      signup:
+        success: "¡Gracias por inscribirte!"
+        must_activate: "Tienes que activar la cuenta antes de iniciar la sesión. Por favor verifica tu correo eléctronico."
+      login:
+        success: "La sesión se ha iniciado."
+        error: "Error: no se han introducido %{login} y contraseña válidos."
+      logout: "La sesión ha terminado."
+      reset_password: "Tu contraseña ha sido reiniciada."
+      permission_denied: "¡Permiso denegado!"
+      not_found: "La página solicitada no se encuentra."
+      unauthenticated: "No se pudo autenticar."
+      validate_password: "debe contener al menos 6 caracteres, letras mayúsculas y minúsculas"
+      current_password_is_not_correct: "no está correcta"
+      you_are_site_admin: "Ahora eres el administrador del sitio."
+      you_signed_up: "Has entrado correctamente."
+      none: "No hay %{model} disponibles."
+      confirm: "¿Estás seguro/a?"
+
+    # default hobo collection translation
+    collection:
+      count: &collection_count
+        zero: &no_model "No hay %{model}"
+        one: "Hay solo 1 %{model}"
+        other: "Hay %{count} %{model}"
+      # you can use the following to completely override the collection heading
+      # be aware that you will loose the automatic Your <collection> / Jom's <collection>
+      # default output for User models
+      # you better define the heading.* in the specific collection namespace
+      #heading:
+      add_form_heading: "Añadir %{model}"
+      empty_message: "Ningún registro"
+
+    # default hobo form translation
+    form:
+      new:
+        heading: "Nuevo registro de %{model}"
+      error:
+        heading: "Ocurrió el siguiente error:"
+      select_many:
+        prompt: "Añadir %{model}"
+
+    # hobo support
+    support:
+      or: "o"
+      a: "un/una"
+      an: "un/una"
+
+    table_plus:
+      search: "Buscar semana"
+      submit_label: "Ir"
+
+    live_search:
+      label: "Buscar"
+      results_label: "Buscar Resultados"
+      close_button: "cerrar"
+      no_results: "No se encuentran resultados."
+
+    dev_user_changer:
+      guest: "Invitado"
+
+    admin:
+      subsite_name: "Administración"
+      invite_new_user: "Invitar nuevo usuario/a"
+
+    subsite:
+      back_link: "Sitio Principal"
+
+    boolean_yes: "Sí"
+    boolean_no: "No"
+    password_hidden: "[contraseña]"
+
+    in_place_editor:
+      click_to_edit: "(haga clic para editar)"
+
+    select_one_editor:
+      blank_message: *no_model

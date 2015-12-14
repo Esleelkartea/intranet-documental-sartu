@@ -1,0 +1,59 @@
+# Hobo application translation file for Spanish.
+# Please, add the specific models and attributes for your application.
+
+# Translated by Domizio Demichelis (dd.nexus@gmail.com)
+# Corrections by Ricardo Pacheco
+
+# This file might be used for other Latin America Spanish Countries without any change
+# It might be ok also for Spain. If you find any error, or if you have any more specific translation,
+# please post it to http://hobousers.googlegroups.com. Thank you!
+
+es:
+  number:
+    currency:
+      format:
+        format: "%n %u €"
+        unit: ""
+        separator: ","
+        delimiter: "."
+        precision: 2
+        significant: false
+        strip_insignificant_zeros: false
+
+  attributes:
+    created_at: Creado el
+    updated_at: Actualizado el
+
+  activerecord:
+    models:
+      user:
+        one: Usuario/a
+        other: Usuarios/as
+    attributes:
+      user:
+        name: Nombre
+        password: Contraseña
+        current_password: Contraseña actual
+        password_confirmation: Confirmación contraseña
+        email_address: Correo electrónico
+    errors:
+      template:
+        header: "Hay %{count} error(es) y no se puede guardar el registro %{model}"        
+        body: "Problemas con los siguientes campos:"
+      models:
+        parte:
+          attributes:
+            horas:
+              blank: ": este valor no puede estar vacío"
+        proyecto: &blanco
+          attributes:
+            nombre:
+              blank: ": este valor no puede estar vacío"
+        actividad:
+          <<: *blanco
+        itemgestion:
+          <<: *blanco
+
+#    attribute_help:
+#      user:
+#        email_address:
